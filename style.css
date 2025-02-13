@@ -1,0 +1,376 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap');
+
+body {
+    background-color: #1a1a1a;
+    color: #f5f5f5;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    overflow: hidden;
+}
+
+
+/* Прелоадер */
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: radial-gradient(circle, rgba(255, 0, 150, 0.5), rgba(0, 255, 255, 0.2));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 36px;
+    font-weight: bold;
+    text-shadow: 0 0 15px rgba(255, 100, 200, 0.7);
+    z-index: 1000;
+    transition: transform 1s ease-in-out;
+}
+
+.preloader h1 {
+    font-size: 72px;
+}
+
+/* Основной контент (изначально спрятан) */
+.content {
+    position: relative;
+    text-align: center;
+    color: white;
+    transform: translateY(0.2vh);
+    opacity: 0;
+    transition: transform 1s ease-in-out, opacity 1s ease-in-out;
+}
+
+/* Анимация прелоадера - он уезжает вверх */
+.preloader.hide {
+    transform: translateY(-100vh);
+}
+
+/* Анимация контента - он плавно появляется снизу */
+.content.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+
+header {
+    display: flex;
+    justify-content: space-between; /* Раздвигаем элементы по краям */
+    align-items: center; /* Выравниваем элементы по вертикали */
+    padding: 30px; /* Добавляем отступы */
+    font-weight: bold;
+    text-transform: uppercase;
+    max-width: 100%; /* Растягиваем header на всю ширину */
+    font-size: 24px;
+}
+
+.contact img {
+    border-radius: 25px;
+    transition: all 0.2s ease-in-out;
+}
+
+.contact img:hover {
+    box-shadow: 0 0 15px rgba(255, 100, 200, 0.7), 
+                0 0 30px rgba(255, 100, 200, 0.5);
+}
+
+/* Градиентное пятно */
+.hero {
+    position: relative;
+    height: 85vh; /* Растягиваем на весь экран */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Центрируем по вертикали */
+    align-items: center; /* Центрируем по горизонтали */
+    text-align: center;
+    padding: 20px;
+}
+
+/* Добавляем псевдоэлемент для фонового градиента */
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 80%;
+    height: 33%;
+    background: radial-gradient(circle, 
+        rgba(255, 0, 0, 0.4),    /* Красный */
+        rgba(255, 165, 0, 0.4),  /* Оранжевый */
+        rgba(255, 255, 0, 0.4),  /* Жёлтый */
+        rgba(0, 255, 0, 0.4),    /* Зелёный */
+        rgba(0, 0, 255, 0.4),    /* Синий */
+        rgba(128, 0, 128, 0.4)   /* Фиолетовый */
+    );
+    filter: blur(100px);
+    transform: translate(-50%, -50%);
+    z-index: -1;
+}
+
+/* Заголовок с размытым градиентным свечением */
+h1 {
+    font-size: 120px;
+    position: relative;
+    color: #fff;
+    text-shadow: 0 0 15px rgba(255, 100, 200, 0.7), 
+                 0 0 30px rgba(255, 100, 200, 0.5);
+}
+
+.hero-title {
+    position: relative; /* Родительский контейнер */
+    display: inline-block; /* Чтобы ширина зависела от содержимого */
+}
+
+.hero-title h1 {
+    position: relative; /* Оставляем текст в потоке */
+    z-index: 2; /* Поднимаем текст над картинкой */
+}
+
+.hero-title img {
+    position: absolute;
+    top: -30px; /* Поднимаем картинку вверх */
+    right: -130px; /* Смещаем картинку вправо */
+    max-width: 300px; /* Настрой размер иконки */
+    height: auto;
+    z-index: 2; /* Оставляем картинку под текстом */
+}
+
+/* Стиль таймера */
+.timer {
+    font-family: monospace;
+    font-size: 1.5rem;
+    margin: 10px 0;
+}
+
+.hint {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.arrows {
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.arrow {
+    font-size: 18px;
+    color: white;
+    opacity: 0;
+    animation: fadeArrows 1.5s infinite;
+}
+
+/* Задержка появления стрелок */
+.hint:nth-child(1) { animation-delay: 0s; }
+.hint:nth-child(2) { animation-delay: 0.5s; }
+.hint:nth-child(3) { animation-delay: 1s; }
+
+/* Анимация плавного появления */
+@keyframes fadeArrows {
+    0% { opacity: 0; transform: translateY(-5px); }
+    50% { opacity: 1; transform: translateY(0px); }
+    100% { opacity: 0; transform: translateY(5px); }
+}
+
+/* Плавный скролл */
+html {
+    scroll-behavior: smooth;
+}
+
+.reasons {
+    padding: 50px 5%;
+}
+
+.reasons h2 {
+    font-size: 56px;
+}
+
+/* Карточки */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 колонки в ряд */
+    gap: 5%; /* Увеличенный промежуток между карточками */
+    margin-top: 5%;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 30px; /* Карточки станут больше */
+    border-radius: 15px;
+    text-align: center;
+    font-size: 40px;
+    box-shadow: 0 0 15px rgba(255, 100, 200, 0.2), 
+                0 0 30px rgba(255, 100, 200, 0.1);
+    margin-bottom: 5%;
+    width: 350px;
+    height: 500px;
+    transition: all 0.4s ease-in-out; /* Плавная анимация */
+}
+
+.card:hover, .card.active {
+    cursor: pointer;
+    width: 360px;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.7),   /* Красный */
+                0 0 25px rgba(255, 165, 0, 0.6), /* Оранжевый */
+                0 0 35px rgba(255, 255, 0, 0.5), /* Жёлтый */
+                0 0 45px rgba(0, 255, 0, 0.5),   /* Зелёный */
+                0 0 55px rgba(0, 0, 255, 0.5),   /* Синий */
+                0 0 65px rgba(128, 0, 128, 0.5); /* Фиолетовый */
+}
+
+.img-placeholder img {
+    max-width: 300px;
+    margin-top: -150px;
+    margin-right: -350px;
+    padding-top: 150px;
+}
+
+/* Финальный блок */
+.final {
+    display: flex;
+    justify-content: center; /* Центрируем по вертикали */
+    align-items: center; /* Центрируем по горизонтали */
+    text-align: center;
+    margin-top: 50px;
+    padding: 50px 20px;
+    height: 85vh;
+}
+
+.final h2 {
+    font-size: 120px;
+    text-shadow:  
+    0 0 15px rgba(255, 0, 150, 0.8),  /* Ярко-розовый */
+    0 0 30px rgba(255, 100, 200, 0.6), /* Светло-розовый */
+    0 0 45px rgba(200, 0, 255, 0.4);  /* Фиолетовый для глубины */
+}
+
+@media (max-width: 480px) {
+    .contact img {
+        width: 35px;
+    }
+
+    .hero {
+        padding: 30px 15px;
+        text-align: center;
+        height: 75vh;
+    }
+    
+    /* Добавляем псевдоэлемент для фонового градиента */
+    .hero::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 40%;
+        height: 90%;
+        background: radial-gradient(circle, 
+            rgba(255, 0, 0, 0.4),    /* Красный */
+            rgba(255, 165, 0, 0.4),  /* Оранжевый */
+            rgba(255, 255, 0, 0.4),  /* Жёлтый */
+            rgba(0, 255, 0, 0.4),    /* Зелёный */
+            rgba(0, 0, 255, 0.4),    /* Синий */
+            rgba(128, 0, 128, 0.4)   /* Фиолетовый */
+        );
+        filter: blur(80px);
+        transform: translate(-50%, -50%);
+        z-index: -1;
+    }
+
+
+    .hero-title h1 {
+        font-size: 32px; /* Заголовок компактнее */
+        margin-top: 200px;
+    }
+
+    .hero-title img {
+        width: 80px; /* Иконка чуть меньше */
+        top: 160px; /* Подвинуть вверх */
+        right: -40px;
+    }
+
+    .timer {
+        font-size: 14px;
+    }
+
+    .arrows {
+        margin-top: 100px;
+    }
+
+    .reasons h2 {
+        font-size: 36px;
+        margin-bottom: 100px;
+    }
+
+    .reasons {
+        display: flex;
+        justify-content: center; /* Центрируем секцию */
+        align-items: center;
+        flex-direction: column;
+        min-height: 100vh; /* Чтобы блок был по центру экрана */
+        text-align: center;
+    }
+    
+    .grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center; /* Центрируем карточки */
+        gap: 20px; /* Добавляем расстояние между ними */
+        max-width: 1000px; /* Ограничиваем ширину */
+    }
+    
+    .card_area {
+        display: flex;
+        justify-content: center;
+    }
+    
+    .card {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 30px;
+        border-radius: 15px;
+        text-align: center;
+        font-size: 30px;
+        box-shadow: 0 0 15px rgba(255, 100, 200, 0.2), 
+                    0 0 30px rgba(255, 100, 200, 0.1);
+        width: 250px;
+        height: 400px;
+        transition: all 0.4s ease-in-out;
+        position: relative; /* Для правильного смещения изображения */
+        margin-bottom: 100px;
+    }
+    
+    .card:hover, .card.active {
+        width: 260px;
+        box-shadow: 0 0 15px rgba(255, 0, 0, 0.7),  
+                    0 0 25px rgba(255, 165, 0, 0.6), 
+                    0 0 35px rgba(255, 255, 0, 0.5), 
+                    0 0 45px rgba(0, 255, 0, 0.5),   
+                    0 0 55px rgba(0, 0, 255, 0.5),   
+                    0 0 65px rgba(128, 0, 128, 0.5);
+    }
+
+    .last {
+        margin-bottom: 0;
+    }
+    
+    .img-placeholder img {
+        max-width: 150px;
+        margin-top: -180px;
+        margin-right: -190px;
+        padding-bottom: 80px;
+    }
+
+    .final {
+        height: 80vh;
+    }
+
+    .final h2 {
+        font-size: 50px;
+        text-shadow:  
+        0 0 15px rgba(255, 0, 150, 0.8),  /* Ярко-розовый */
+        0 0 30px rgba(255, 100, 200, 0.6), /* Светло-розовый */
+        0 0 45px rgba(200, 0, 255, 0.4);  /* Фиолетовый для глубины */
+    }
+}
