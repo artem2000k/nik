@@ -7,6 +7,18 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 2000);
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+    const header = document.querySelector("header");
+
+    window.addEventListener("scroll", function () {
+        if (window.scrollY > 50) { // Если прокрутка больше 50px
+            header.classList.add("scrolled");
+        } else {
+            header.classList.remove("scrolled");
+        }
+    });
+});
+
 // Дата начала отсчета (31 декабря 2023 года, 00:00:00)
 const startDate = new Date("2023-12-31T18:00:00Z");
 
